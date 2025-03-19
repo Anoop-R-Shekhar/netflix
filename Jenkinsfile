@@ -10,7 +10,7 @@ pipeline {
     stage("Build"){
             steps {
                 echo "Building the image"
-                sh "docker build -t my-note-app ."
+                sh "docker build -t Netflix-web ."
             }
         }
     }
