@@ -26,7 +26,7 @@ pipeline {
      stage("Deploy to Kubernetes"){
             steps {
                 script{
-                    dir('/root/Netflix-Clone-main'){
+                    dir('/var/lib/jenkins/workspace/netflix-project'){
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                         sh 'kubectl delete --all pods'
                         sh 'kubectl apply -f deploy.yaml'
