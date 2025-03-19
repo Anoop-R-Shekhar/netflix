@@ -23,5 +23,18 @@ pipeline {
                 }
             }
         }
+     stage("Deploy to Kubernetes"){
+            steps {
+                script{
+                    dir('Netflix-Clone-main'){
+                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                        sh 'kubectl delete --all pods'
+                        sh 'kubectl apply -f deploy.yaml'
+                        sh 'kubectl apply -f netsvc.yaml'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
