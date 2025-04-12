@@ -10,16 +10,16 @@ pipeline {
     stage("Build"){
             steps {
                 echo "Building the image"
-                sh "docker build -t netflix-web ."
+                sh "docker build -t netflix-web1 ."
             }
         }
     stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerhubPass",usernameVariable:"dockerhubUser")]){
-                sh "docker tag netflix-web ${env.dockerhubUser}/netflix-web:latest"
+                sh "docker tag netflix-web1 ${env.dockerhubUser}/netflix-web1:latest"
                 sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
-                sh "docker push ${env.dockerhubUser}/netflix-web:latest"
+                sh "docker push ${env.dockerhubUser}/netflix-web1:latest"
                 }
             }
         }
